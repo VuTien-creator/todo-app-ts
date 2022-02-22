@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+import AddToDoComponent from './components/AddToDoComponent'
+import ToDoListComponent from './components/ToDoListComponent'
+
+interface ITodo {
+  id: number
+  title: string
+  completed: boolean
+}
+
+export interface ITodoList {
+  todoList: ITodo[]
+}
+
 function App() {
+
+  const [todoList, setTodoList] = useState<ITodoList>({
+    todoList: [
+      {
+        id: 1,
+        title: 'asd',
+        completed: false,
+      }
+    ]
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>react To Do app</h2>
+      <ToDoListComponent
+        // todoList={todoList}
+        todoList={todoList.todoList} setTodoList={setTodoList}
+      />
+      <AddToDoComponent todoList={todoList.todoList} setTodoList={setTodoList} />
     </div>
   );
 }
